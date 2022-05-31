@@ -39,7 +39,7 @@ export default class Keyboard extends EventEmitter{
         if(this.keydown("ArrowRight")||this.keydown("d")){
             this.experience.camera.controls.moveRight(this.experience.camera.speed);
         }
-        if(this.keydown("e") && this.experience.world.fox.intersected){
+        if(this.keydown("e") && (this.experience.intersected!=null)){
             const popup = document.querySelector(".popup");
             popup.classList.add("active");
             this.experience.camera.controls.unlock();

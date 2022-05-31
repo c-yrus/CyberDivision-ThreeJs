@@ -1,7 +1,6 @@
 import * as THREE from 'three'
 import Experience from './Experience.js'
 import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls.js'
-import WorldObject from './World/WorldObject.js'
 
 export default class Camera
 {
@@ -15,6 +14,8 @@ export default class Camera
         this.setInstance()
         this.setControls()
         this.setRaycaster()
+        this.notification = document.querySelector(".notification")
+        
     }
 
     setRaycaster(){
@@ -52,27 +53,17 @@ export default class Camera
     update()
     {
         this.raycaster.setFromCamera(new THREE.Vector2(0, 0), this.instance)
-        let intersects = this.raycaster.intersectObjects()
-        
+        let intersects = this.raycaster.intersectObjects(this.experience.intersectable)
         if(intersects.length > 0){
-            let intersect = intersects[0]
-                if(intersect.object.name == 'fox'){
-                    this.experience.world.fox.intersected = true
-                    this.experience.world.fox.changeColor()
-                }
-                else{
-                    this.experience.world.fox.intersected = false
-                    this.experience.world.fox.normalColor()
-                }
+            this.experience.intersected =  intersects[0]
+            this.notification.classList.remove("hide")
+            
         }
-        if(intersects.length ==0){
-            if(this.experience.world.fox){
-                this.experience.world.fox.intersected = false
-                this.experience.world.fox.normalColor()
-            }
+        if(intersects.length <=0){
+            this.notification.classList.add("hide")
+            this.experience.intersected = null
         }
-        
-        
     }
+    
     
 }

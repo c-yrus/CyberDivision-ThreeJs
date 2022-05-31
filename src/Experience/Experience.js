@@ -40,7 +40,8 @@ export default class Experience
         this.renderer = new Renderer()
         this.keyboard = new Keyboard()
         this.world = new World()
-
+        this.intersectable = []
+        this.intersected = null
         // Resize event
         this.sizes.on('resize', () =>
         {
