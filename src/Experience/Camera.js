@@ -57,11 +57,12 @@ export default class Camera
         if(intersects.length > 0){
             this.experience.intersected =  intersects[0]
             this.notification.classList.remove("hide")
-            
+            return 
         }
         if(intersects.length <=0){
             this.notification.classList.add("hide")
             this.experience.intersected = null
+            return 
         }
     }
     

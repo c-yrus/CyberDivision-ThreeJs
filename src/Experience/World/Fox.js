@@ -3,7 +3,7 @@ import Experience from '../Experience.js'
 
 export default class Fox 
 {
-    constructor()
+    constructor(title = "Your boy FOX")
     {
         this.intersected = false
         this.experience = new Experience()
@@ -11,7 +11,7 @@ export default class Fox
         this.resources = this.experience.resources
         this.time = this.experience.time
         this.debug = this.experience.debug
-
+        this.title = title
         // Debug
         if(this.debug.active)
         {
@@ -28,13 +28,15 @@ export default class Fox
     {
         this.model = this.resource.scene
         this.model.scale.set(0.02, 0.02, 0.02)
+        this.model.position.set(0, 2, -15)
+        
         this.scene.add(this.model)
-
         this.model.traverse((child) =>
         {
             if(child instanceof THREE.Mesh)
             {
                 child.castShadow = true
+                child.title = this.title
             }
         })
     }

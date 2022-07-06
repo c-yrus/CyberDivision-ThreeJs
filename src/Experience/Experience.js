@@ -42,6 +42,8 @@ export default class Experience
         this.world = new World()
         this.intersectable = []
         this.intersected = null
+
+
         // Resize event
         this.sizes.on('resize', () =>
         {
